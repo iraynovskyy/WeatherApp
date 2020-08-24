@@ -1,21 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
-</head>
 
-<body>
+{% block body %}
+
     <section class="hero is-primary is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    What's the weather like around the world?
-                </h1>
+                    
+                <!-- templates/registration/login.html -->
+                {% if user.is_authenticated %}
+                    <p>
+                        <span style="color:gray">Hi, {{ user.username }}!</span> What's the weather like around the world?
+                        <button type="submit" style="float:right"><a href="logout">Logout</a></button>         
+                    </p>
+                {% else %}
+                    <p>
+                        What's the weather like around the world?
+                        <button type="submit" style="float:right"><a href="register">Sign Up</a></button>
+                        <button type="submit" style="float:right"><a href="login">Login</a></button>        
+                    </p>
+                    
+                {% endif %}
+                
+            </h1>
+
             </div>
         </div>
     </section>
@@ -49,7 +58,6 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-offset-4 is-4">
-
                     {% for city_weather in weather_data %}
                     <div class="box">
                         <article class="media">
@@ -64,27 +72,54 @@
                                         <span class="title">{{ city_weather.city }}</span>
                                         <br>
                                         <span class="subtitle">{{ city_weather.temperature }} °C</span>
-                                        <br> {{ city_weather.description }}
+                                        <br> 
+                                        {{ city_weather.description }}
                                     </p>
                                 </div>
                             </div>
                             <div class="media-right">
-                                <a href="{% url 'delete_city' city_weather.city %}">
-                                    <button class="delete"></button>
+                                <a href="{% url 'delete_city' city_weather.city %}" class="nav-item">
+                                    <span class="icon">
+                                        <i class="fa fa-times fa-lg"></i>
+                                    </span>
                                 </a>
-                            </div>
-                        </article>
-                    </div>
-                    {% endfor %}
+                                <br><br>
 
+                                <a href="{% url 'detail_city' city_weather.city %}" class="nav-item">
+                                    <span class="icon">
+                                        <i class="fa fa-soundcloud fa-lg"></i>
+                                    </span>
+                                </a>
+
+                            </div>
+                        </article>                     
+                        
+                            <!--div class="columns">
+                
+                                <div class="column is-one-third"><p style="text-align:center;"></p></div>
+                                <div class="column is-two-thirds"><p style="text-align:center;">Graphs</p></div>
+                                
+                              </div>-->
+                            <!--for text inside the box-->                        
+                    </div>                
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>    
+    </section>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column is-offset-3 is-6">
+                <div class="box">
+                    <canvas id="myChart0"></canvas>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <br>
 
-<footer class="footer">
+{% endblock %}
 
-</footer>
 
-</body>
-</html>

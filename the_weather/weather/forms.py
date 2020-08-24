@@ -1,5 +1,7 @@
 from django.forms import ModelForm, TextInput
 from .models import City
+from django.contrib.auth.models import User
+from django import forms
 
 class CityForm(ModelForm):
     class Meta:

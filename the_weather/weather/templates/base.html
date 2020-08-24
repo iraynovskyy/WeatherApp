@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AnyWeather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> <!--for icons-->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <style>
+        footer {
+        text-align: center;
+        color:gray;
+        }
+    </style>
+    <!-- This is for charts from 'google charts Chart.js!' -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+    
+{% block body %}
+{% endblock %}
+
+<footer class="footer">
+    <p>&#169 All weather data is taken from openweathermap.org</p>
+</footer>
+
+
+
+</body>
+
+
+<script>
+    var ctx = document.getElementById('myChart0').getContext('2d');
+    ctx.height = 50;
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'radar',
+
+        // The data for our dataset
+        data: {
+        labels: {{glob_city|safe}},
+                datasets: [{ 
+                data: {{glob_temperature|safe}},
+                label: "temperature degrees Celsium",
+                borderColor: 'rgb(255,140,0)',
+                fill: true
+            }, { 
+                data: {{glob_wind_speed|safe}},
+                label: "wind",
+                borderColor: "#3cba9f",
+                fill: true
+            }, { 
+                data: {{glob_humidity|safe}},
+                label: "% humidity",
+                borderColor: 'rgb(0,140,0)',
+                fill: true
+            }
+            ]
+        },
+
+        // Configuration options go here
+        options: {
+            
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('myChart00').getContext('2d');
+    ctx.height = 50;
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'radar',
+
+        // The data for our dataset
+        data: {
+        labels: {{glob_city|safe}},
+                datasets: [{ 
+                data: {{glob_temperature|safe}},
+                label: "temperature degrees Celsium",
+                borderColor: 'rgb(255,140,0)',
+                fill: true
+            }, { 
+                data: {{glob_wind_speed|safe}},
+                label: "wind",
+                borderColor: "#3cba9f",
+                fill: true
+            }, { 
+                data: {{glob_humidity|safe}},
+                label: "% humidity",
+                borderColor: 'rgb(0,140,0)',
+                fill: true
+            }
+            ]
+        },
+
+        // Configuration options go here
+        options: {
+            
+        }
+    });
+</script>
+</html>

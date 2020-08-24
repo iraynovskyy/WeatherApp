@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <style>
+        footer {
+        text-align: center;
+        color:gray;
+        }
+        p {
+            font-family: cursive;
+            text-align: center;
+        }
+        form {
+            text-align: center;
+        }
+        li {
+            text-align: center;
+        }
+    </style>
+    <title>Login</title>
+</head>
+<body>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    <p>
+                        Hmm...Let's login!
+                        <button type="submit" style="float:right"><a href="../../">Back</a></button>        
+                    </p>
+                </h1>
+            </div>
+        </div>
+    </section>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="username"><br>
+        <input type="password" name="password" placeholder="password"><br>
+        <input type="Submit">
+    </form>
+
+    <div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    </div>
+
+</body>
+</html>

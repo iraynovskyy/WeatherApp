@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AnyWeather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> <!--for icons-->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    
+    <style>
+        footer {
+        text-align: center;
+        color:gray;
+        }
+        p {
+            font-family: cursive;
+        }
+    </style>
+    <!-- This is for charts from 'google charts Chart.js!' -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    
+                <!-- templates/registration/login.html -->
+                {% if user.is_authenticated %}
+                    <p>
+                        <span style="color:gray">Hi, {{ user.username }}!</span> Detailed weather in <span style="color:gray">{{ weather_data_detail.city }}</span>
+                        <button type="submit" style="float:right"><a href="logout">Logout</a></button>
+                        <button type="submit" style="float:right"><a href="../../">Back</a></button>        
+                    </p>
+                {% else %}
+                    <p>
+                        Detailed weather in <span style="color:gray">{{ weather_data_detail.city }}</span>
+                        <button type="submit" style="float:right"><a href="../../">Back</a></button>
+                        <!--<button type="submit" style="float:right"><a href="register">Sign Up</a></button>
+                        <button type="submit" style="float:right"><a href="login">Login</a></button>       --> 
+                    </p>
+                    
+                {% endif %}
+                
+            </h1>
+
+            </div>
+        </div>
+    </section>
+
+<div class="container">
+    <div class="columns">
+        <div class="column is-offset-3 is-6">
+            <br>
+            <div class="box">
+                <div>
+                    <table style="width:100%">
+                        <tr>
+                          <th>hours</th>
+                          <th></th>
+                          <th><!--temp (°C)--></th>
+                          <th><!--description--></th>
+                          <th>humidity</th>
+                          <th>clouds</th>
+                          <th>wind</th>
+                        </tr>
+                        <tr>
+                          <td>+0</td>
+                          <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_now }}.png" alt="Image" width="30" height="30"></td>
+                          <td>{{ weather_data_detail.temperature_now }}°C</td>
+                          <td>{{ weather_data_detail.description_now }}</td>
+                          <td>{{ weather_data_detail.humidity_now }}</td>
+                          <td>{{ weather_data_detail.clouds_now }}</td>
+                          <td>{{ weather_data_detail.wind_speed_now }}m/s</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>+1</td>
+                          <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_1hour }}.png" alt="Image" width="30" height="30"></td>
+                          <td>{{ weather_data_detail.temperature_1hour }}°C</td>
+                          <td>{{ weather_data_detail.description_1hour }}</td>
+                          <td>{{ weather_data_detail.humidity_1hour }}</td>
+                          <td>{{ weather_data_detail.clouds_1hour }}</td>
+                          <td>{{ weather_data_detail.wind_speed_1hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+2</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_2hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_2hour }}°C</td>
+                            <td>{{ weather_data_detail.description_2hour }}</td>
+                            <td>{{ weather_data_detail.humidity_2hour }}</td>
+                            <td>{{ weather_data_detail.clouds_2hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_2hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+3</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_3hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_3hour }}°C</td>
+                            <td>{{ weather_data_detail.description_3hour }}</td>
+                            <td>{{ weather_data_detail.humidity_3hour }}</td>
+                            <td>{{ weather_data_detail.clouds_3hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_3hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+4</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_4hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_4hour }}°C</td>
+                            <td>{{ weather_data_detail.description_4hour }}</td>
+                            <td>{{ weather_data_detail.humidity_4hour }}</td>
+                            <td>{{ weather_data_detail.clouds_4hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_4hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+5</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_5hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_5hour }}°C</td>
+                            <td>{{ weather_data_detail.description_5hour }}</td>
+                            <td>{{ weather_data_detail.humidity_5hour }}</td>
+                            <td>{{ weather_data_detail.clouds_5hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_5hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+6</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_6hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_6hour }}°C</td>
+                            <td>{{ weather_data_detail.description_6hour }}</td>
+                            <td>{{ weather_data_detail.humidity_6hour }}</td>
+                            <td>{{ weather_data_detail.clouds_6hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_6hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+7</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_7hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_7hour }}°C</td>
+                            <td>{{ weather_data_detail.description_7hour }}</td>
+                            <td>{{ weather_data_detail.humidity_7hour }}</td>
+                            <td>{{ weather_data_detail.clouds_7hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_7hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+8</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_8hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_8hour }}°C</td>
+                            <td>{{ weather_data_detail.description_8hour }}</td>
+                            <td>{{ weather_data_detail.humidity_8hour }}</td>
+                            <td>{{ weather_data_detail.clouds_8hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_8hour }}m/s</td>
+                        </tr>
+                        <tr>
+                            <td>+9</td>
+                            <td><img src="http://openweathermap.org/img/w/{{ weather_data_detail.icon_9hour }}.png" alt="Image" width="30" height="30"></td>
+                            <td>{{ weather_data_detail.temperature_9hour }}°C</td>
+                            <td>{{ weather_data_detail.description_9hour }}</td>
+                            <td>{{ weather_data_detail.humidity_9hour }}</td>
+                            <td>{{ weather_data_detail.clouds_9hour }}</td>
+                            <td>{{ weather_data_detail.wind_speed_9hour }}m/s</td>
+                        </tr>
+                    </table>
+                    
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="columns">
+        <div class="column is-offset-2 is-8">
+            <h1><p>{{ weather_data_detail.city }}</p></h1>
+            <div class="box">
+                <canvas id="myChart1"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="columns">
+        <div class="column is-offset-2 is-8">
+            <div class="box">
+                <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="columns">
+        <div class="column is-offset-2 is-8">
+            <div class="box">
+                <canvas id="myChart3"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+</body>
+
+<script>
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: {{chart_labels|safe}},
+            datasets: [{
+                label: 'Temperature (°C)',
+                backgroundColor: 'rgb(255,229,204)',
+                borderColor: 'rgb(255,140,0)',
+                data: {{chart_data_temp|safe}},
+                fill: true
+                }],
+            },
+        
+        // Configuration options go here
+        options: {}
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+        labels: {{chart_labels|safe}},
+        datasets: [{ 
+        data: {{chart_data_wind|safe}},
+        label: "Wind speed (m/s)",
+        borderColor: "#8e5ea2",
+        fill: true
+      }
+    ]
+  },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+        labels: {{chart_labels|safe}},
+        datasets: [{ 
+        data: {{chart_data_humidity|safe}},
+        label: "% humidity",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: {{chart_data_clouds|safe}},
+        label: "% of clouds",
+        borderColor: "#3cba9f",
+        fill: false
+      },{ 
+        data: {{chart_data_wind|safe}},
+        label: "Wind speed (m/s)",
+        borderColor: "#8e5ea2",
+        fill: true
+      } 
+    ]
+  },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
+
+
+
+
+<footer class="footer">
+    <p >"Be passionate about what you do."</p>
+</footer>
+
+</html>
